@@ -1,0 +1,18 @@
+#to do: how traceroute works
+#create network dictionary of sorts: router(some delay in processing packet: routing) + corresponding router buffer
+#buffer monitors: queue(places in arr), time spent in queue
+#packets: normal headers - simplistic: ip/mac address for routing purposes, before next hop: [queue depth (at queueing time, and dequeing), time spent in buffer], final_dst and init_src addresses, prev hop src and dst
+
+#to implement:
+#routers - fully connected
+#routing protocol - after specifying nodes (routers) + link weights , create 'table'/list with dijkstra's to track and return shortest path. Global list, gets updated 
+#to simplify, each node has access to this one list, so each can read and update from there. Stll might need parallelism to run nodes simultaneously
+#alternatively: randomly assign 'traffic' to each node at each iteration - random queue size and time spent in queue(has to kinda match the queue size - speed dependent). Then print out buffer info along with current shortest paths. In relation to packet being transmitted i.e. packet being processed triggers printing of time
+
+#have each router operate on it's own thread? while main thead just sends packets.. concurrency issues? :/
+#link weights/states have to be accessed by all the threads
+#results: show all shortest paths of each router to other nodes at intervals
+#evaluating performance? Compare against normal routing without 'optimisation' for end to end trip: keep queue params the same
+
+#objects - nodes/router (router id/ip(set and not changed), queue size, buffersize, links(i, weight, speed) )
+#        - packet(final_dst, init_src, dst, src, qd_enqueue, qd_dequeue, t_buff)
